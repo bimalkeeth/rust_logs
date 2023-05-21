@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<br/><br/>use std::thread; <br/>use std::sync::mpsc; <br/> <br/>fn main() { <br/> let (tx, rx) = mpsc::sync_channel(1);<br/> let tx_clone = tx.clone();<br/><br/> let _ = tx.send(0);<br/><br/> thread::spawn(move || { <br/> let _ = tx.send(1);<br/> }); <br/><br/> thread::spawn(move || {<br/> let _ = tx_clone.send(2);<br/> }); <br/><br/> println!("Received {} via the channel", rx.recv().unwrap());<br/> println!("Received {} via the channel", rx.recv().unwrap());<br/> println!("Received {} via the channel", rx.recv().unwrap());<br/> println!("Received {:?} via the channel", rx.recv()); <br/>}<br/><br/>
+
+
+
+
+
+</body>
+</html>
